@@ -1,9 +1,13 @@
 package ua.ithillel.product;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+
 import java.time.LocalDateTime;
 import java.util.Locale;
-import java.util.Objects;
 
+@Getter
+@EqualsAndHashCode
 public class Product {
 
     private final ProductTypes type;
@@ -25,26 +29,6 @@ public class Product {
         setDiscount(discount);
     }
 
-    public ProductTypes getType() {
-        return type;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public Integer getDiscount() {
-        return discount;
-    }
-
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
     public void setPrice(Double price) {
         this.price = price;
     }
@@ -62,27 +46,5 @@ public class Product {
         String withoutDiscount = "{type=%s, id=%d, price=%.2f$" + datePattern;
         String formatPattern = discount != null ? withDiscount : withoutDiscount;
         return String.format(Locale.US, formatPattern, type, id, price, discount, createDate);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Product product = (Product) o;
-
-        if (type != product.type) return false;
-        return Objects.equals(id, product.id) && Objects.equals(price, product.price)
-                && Objects.equals(discount, product.discount) && Objects.equals(createDate, product.createDate);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = type != null ? type.hashCode() : 0;
-        result = 31 * result + (id != null ? id.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (discount != null ? discount.hashCode() : 0);
-        result = 31 * result + createDate.hashCode();
-        return result;
     }
 }
